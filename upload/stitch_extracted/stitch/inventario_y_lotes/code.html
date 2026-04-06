@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Precision POS - Inventory &amp; Batches</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed": "#ffddb8",
+                        "primary-fixed-dim": "#abc7ff",
+                        "tertiary": "#653e00",
+                        "surface-tint": "#005cbb",
+                        "on-surface-variant": "#424752",
+                        "inverse-surface": "#233144",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-container": "#005cbb",
+                        "surface": "#f8f9ff",
+                        "outline": "#727784",
+                        "inverse-on-surface": "#eaf1ff",
+                        "on-background": "#0d1c2e",
+                        "on-tertiary-fixed": "#2a1700",
+                        "surface-container-low": "#eff4ff",
+                        "surface-container-high": "#dce9ff",
+                        "primary-fixed": "#d7e2ff",
+                        "on-surface": "#0d1c2e",
+                        "on-secondary-container": "#00714b",
+                        "surface-variant": "#d5e3fc",
+                        "on-tertiary-fixed-variant": "#653e00",
+                        "on-primary-fixed": "#001b3f",
+                        "surface-container": "#e6eeff",
+                        "on-tertiary": "#ffffff",
+                        "secondary-fixed": "#8df7c1",
+                        "inverse-primary": "#abc7ff",
+                        "tertiary-fixed-dim": "#ffb95f",
+                        "error-container": "#ffdad6",
+                        "tertiary-container": "#855300",
+                        "on-primary": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "outline-variant": "#c2c6d4",
+                        "surface-bright": "#f8f9ff",
+                        "secondary-fixed-dim": "#71dba6",
+                        "on-secondary-fixed-variant": "#005235",
+                        "on-error-container": "#93000a",
+                        "on-primary-fixed-variant": "#00458f",
+                        "on-tertiary-container": "#ffd099",
+                        "secondary": "#006c47",
+                        "primary": "#00458f",
+                        "surface-container-highest": "#d5e3fc",
+                        "on-secondary-fixed": "#002113",
+                        "background": "#f8f9ff",
+                        "error": "#ba1a1a",
+                        "on-error": "#ffffff",
+                        "surface-dim": "#ccdbf3",
+                        "secondary-container": "#8af5be",
+                        "on-primary-container": "#c7d9ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Inter"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface">
+<!-- Navigation Drawer -->
+<aside class="fixed left-0 top-0 flex flex-col h-full z-40 bg-[#d5e3fc] dark:bg-[#1a2b3c] h-screen w-72 rounded-r-none no-border tonal-stacking shadow-none">
+<div class="px-6 py-8">
+<div class="flex items-center gap-3 mb-10">
+<div class="w-12 h-12 rounded-full bg-primary-container flex items-center justify-center text-white shadow-lg overflow-hidden">
+<img alt="Store Manager" data-alt="Professional headshot of a store manager in a clean retail environment, soft lighting, professional attire" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDK94Ab2hCibNMH0Y9ZM34Il4jlxblz5fSxSk-w5-1-kIYIzAgsx_IFc14Ti8nwOmjInu3CyXw-fNrWvSO_u1M6UkNnDr1qeMs5chmsIot5h2pZtdTioZxU2oxI9_aUgbMqwMMpiuYZEYdr_836LXIZlzqUjix6jc-RWhLFuucuRkIqm1hF9-aC5lmy4WNOkzd1G-R9uX0f6Hy4cwhiPbJ3c_G_JPvf09I3_PcCCvOfOZ6fgCVvS3QkbdqYauXm0zn3HFAgSpOTCF4"/>
+</div>
+<div>
+<h2 class="text-[#00458f] font-bold text-lg leading-tight">Main Branch</h2>
+<p class="text-xs font-medium uppercase tracking-wider opacity-70">Admin Access</p>
+</div>
+</div>
+<nav class="space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-[#0d1c2e] dark:text-slate-300 hover:bg-[#eff4ff] dark:hover:bg-slate-800 mx-2 my-1 rounded-lg transition-transform duration-200 hover:translate-x-1" href="#">
+<span class="material-symbols-outlined">point_of_sale</span>
+<span class="font-['Inter'] text-sm font-medium uppercase tracking-wider">Sales</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-[#00458f] text-white rounded-lg mx-2 my-1 shadow-lg shadow-blue-900/20 transition-transform duration-200 hover:translate-x-1" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="font-['Inter'] text-sm font-medium uppercase tracking-wider">Inventory</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-[#0d1c2e] dark:text-slate-300 hover:bg-[#eff4ff] dark:hover:bg-slate-800 mx-2 my-1 rounded-lg transition-transform duration-200 hover:translate-x-1" href="#">
+<span class="material-symbols-outlined">admin_panel_settings</span>
+<span class="font-['Inter'] text-sm font-medium uppercase tracking-wider">Admin</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-[#0d1c2e] dark:text-slate-300 hover:bg-[#eff4ff] dark:hover:bg-slate-800 mx-2 my-1 rounded-lg transition-transform duration-200 hover:translate-x-1" href="#">
+<span class="material-symbols-outlined">shopping_cart</span>
+<span class="font-['Inter'] text-sm font-medium uppercase tracking-wider">Purchases</span>
+</a>
+</nav>
+</div>
+<div class="mt-auto px-8 py-6">
+<span class="text-[10px] font-bold opacity-40">v2.4.0</span>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-72 min-h-screen">
+<!-- Top App Bar -->
+<header class="flex justify-between items-center px-8 py-6 w-full bg-[#f8f9ff] dark:bg-[#0d1c2e] sticky top-0 z-30">
+<div>
+<h1 class="text-2xl font-black text-[#00458f] dark:text-blue-400 uppercase tracking-widest">Precision POS</h1>
+<p class="text-sm font-medium text-on-surface-variant">Inventory &amp; Batches Control</p>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative">
+<span class="absolute inset-y-0 left-3 flex items-center text-outline">
+<span class="material-symbols-outlined text-xl">search</span>
+</span>
+<input class="pl-10 pr-4 py-2 bg-surface-container-lowest border-none rounded-xl w-64 shadow-sm focus:ring-2 focus:ring-primary/20 text-sm" placeholder="Search product or SKU..." type="text"/>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-full bg-surface-container-high text-primary hover:bg-primary-fixed transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</div>
+</header>
+<!-- Content Canvas -->
+<div class="p-8">
+<!-- Stats Dashboard Bento -->
+<div class="grid grid-cols-12 gap-6 mb-10">
+<div class="col-span-12 md:col-span-4 p-6 bg-surface-container-lowest rounded-xl shadow-sm border-l-4 border-primary">
+<p class="text-xs font-bold uppercase tracking-widest text-outline mb-2">Total SKU active</p>
+<p class="text-4xl font-black text-on-surface">1,248</p>
+<div class="mt-4 flex items-center gap-2 text-secondary text-sm font-bold">
+<span class="material-symbols-outlined text-sm">trending_up</span>
+<span>+12% this month</span>
+</div>
+</div>
+<div class="col-span-12 md:col-span-4 p-6 bg-surface-container-lowest rounded-xl shadow-sm border-l-4 border-error">
+<p class="text-xs font-bold uppercase tracking-widest text-outline mb-2">Expired Batches</p>
+<p class="text-4xl font-black text-error">14</p>
+<div class="mt-4 flex items-center gap-2 text-error text-sm font-bold">
+<span class="material-symbols-outlined text-sm">warning</span>
+<span>Requires Action</span>
+</div>
+</div>
+<div class="col-span-12 md:col-span-4 p-6 bg-surface-container-lowest rounded-xl shadow-sm border-l-4 border-tertiary">
+<p class="text-xs font-bold uppercase tracking-widest text-outline mb-2">Near Expiry (60d)</p>
+<p class="text-4xl font-black text-tertiary">38</p>
+<div class="mt-4 flex items-center gap-2 text-tertiary text-sm font-bold">
+<span class="material-symbols-outlined text-sm">schedule</span>
+<span>Discount suggested</span>
+</div>
+</div>
+</div>
+<!-- Inventory Management Table -->
+<div class="bg-surface-container-lowest rounded-3xl overflow-hidden shadow-sm">
+<div class="px-8 py-6 border-b border-outline-variant/10 flex justify-between items-center">
+<h3 class="text-xl font-bold text-on-surface">Batch Details</h3>
+<div class="flex gap-2">
+<button class="px-4 py-2 bg-surface-container-high rounded-lg text-sm font-bold text-primary flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">filter_list</span> Filter
+                        </button>
+<button class="px-4 py-2 bg-surface-container-high rounded-lg text-sm font-bold text-primary flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">file_download</span> Export
+                        </button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low">
+<th class="px-8 py-4 text-[10px] font-bold uppercase tracking-widest text-outline">Product Name</th>
+<th class="px-6 py-4 text-[10px] font-bold uppercase tracking-widest text-outline">SKU</th>
+<th class="px-6 py-4 text-[10px] font-bold uppercase tracking-widest text-outline">Batch Number</th>
+<th class="px-6 py-4 text-[10px] font-bold uppercase tracking-widest text-outline">Expiration Date</th>
+<th class="px-6 py-4 text-[10px] font-bold uppercase tracking-widest text-outline">Stock Level</th>
+<th class="px-6 py-4 text-[10px] font-bold uppercase tracking-widest text-outline">Status</th>
+<th class="px-8 py-4 text-[10px] font-bold uppercase tracking-widest text-outline text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/10">
+<!-- Row 1: Healthy -->
+<tr class="hover:bg-surface-container-low/50 transition-colors">
+<td class="px-8 py-5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">medication</span>
+</div>
+<span class="font-bold text-on-surface">Amoxicillin 500mg</span>
+</div>
+</td>
+<td class="px-6 py-5 font-mono text-sm text-on-surface-variant">PH-2294-AM</td>
+<td class="px-6 py-5 font-medium text-on-surface">L-883421</td>
+<td class="px-6 py-5 text-sm">Oct 24, 2025</td>
+<td class="px-6 py-5">
+<div class="flex flex-col gap-1">
+<span class="text-sm font-black">450 Units</span>
+<div class="w-24 h-1.5 bg-surface-container-high rounded-full overflow-hidden">
+<div class="bg-secondary h-full w-[85%]"></div>
+</div>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-tighter bg-secondary-container text-on-secondary-container">
+                                        Healthy
+                                    </span>
+</td>
+<td class="px-8 py-5 text-right">
+<button class="text-outline hover:text-primary transition-colors"><span class="material-symbols-outlined">more_vert</span></button>
+</td>
+</tr>
+<!-- Row 2: Warning Expiration -->
+<tr class="hover:bg-surface-container-low/50 transition-colors">
+<td class="px-8 py-5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">sanitizer</span>
+</div>
+<span class="font-bold text-on-surface">Hydro Gel Sanitizer</span>
+</div>
+</td>
+<td class="px-6 py-5 font-mono text-sm text-on-surface-variant">HY-5501-GS</td>
+<td class="px-6 py-5 font-medium text-on-surface">L-900213</td>
+<td class="px-6 py-5 text-sm text-tertiary font-bold">Apr 15, 2024</td>
+<td class="px-6 py-5">
+<div class="flex flex-col gap-1">
+<span class="text-sm font-black">120 Units</span>
+<div class="w-24 h-1.5 bg-surface-container-high rounded-full overflow-hidden">
+<div class="bg-tertiary h-full w-[40%]"></div>
+</div>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-tighter bg-tertiary-fixed text-tertiary">
+                                        Near Expiry
+                                    </span>
+</td>
+<td class="px-8 py-5 text-right">
+<button class="text-outline hover:text-primary transition-colors"><span class="material-symbols-outlined">more_vert</span></button>
+</td>
+</tr>
+<!-- Row 3: Critical Stock -->
+<tr class="hover:bg-surface-container-low/50 transition-colors">
+<td class="px-8 py-5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">vaccines</span>
+</div>
+<span class="font-bold text-on-surface">Vitamin B12 Complex</span>
+</div>
+</td>
+<td class="px-6 py-5 font-mono text-sm text-on-surface-variant">VT-0021-BX</td>
+<td class="px-6 py-5 font-medium text-on-surface">L-112009</td>
+<td class="px-6 py-5 text-sm">Dec 12, 2026</td>
+<td class="px-6 py-5">
+<div class="flex flex-col gap-1">
+<span class="text-sm font-black text-error">12 Units</span>
+<div class="w-24 h-1.5 bg-surface-container-high rounded-full overflow-hidden">
+<div class="bg-error h-full w-[5%]"></div>
+</div>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-tighter bg-error-container text-on-error-container">
+                                        Critical Stock
+                                    </span>
+</td>
+<td class="px-8 py-5 text-right">
+<button class="text-outline hover:text-primary transition-colors"><span class="material-symbols-outlined">more_vert</span></button>
+</td>
+</tr>
+<!-- Row 4: Expired -->
+<tr class="hover:bg-surface-container-low/50 transition-colors">
+<td class="px-8 py-5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">medical_services</span>
+</div>
+<span class="font-bold text-on-surface">Sterile Bandages 4x4</span>
+</div>
+</td>
+<td class="px-6 py-5 font-mono text-sm text-on-surface-variant">BD-7781-ST</td>
+<td class="px-6 py-5 font-medium text-on-surface">L-445192</td>
+<td class="px-6 py-5 text-sm text-error font-black">Jan 30, 2024</td>
+<td class="px-6 py-5">
+<div class="flex flex-col gap-1">
+<span class="text-sm font-black opacity-40">85 Units</span>
+<div class="w-24 h-1.5 bg-surface-container-high rounded-full overflow-hidden">
+<div class="bg-outline h-full w-full opacity-20"></div>
+</div>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-tighter bg-[#0d1c2e] text-white">
+                                        Expired
+                                    </span>
+</td>
+<td class="px-8 py-5 text-right">
+<button class="text-outline hover:text-primary transition-colors"><span class="material-symbols-outlined">more_vert</span></button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="px-8 py-6 bg-surface-container-low/30 border-t border-outline-variant/5 flex items-center justify-between">
+<p class="text-sm text-on-surface-variant font-medium">Showing 4 of 1,248 items</p>
+<div class="flex gap-2">
+<button class="w-10 h-10 flex items-center justify-center rounded-lg bg-surface-container-lowest text-on-surface hover:bg-white border border-outline-variant/10 shadow-sm">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="px-4 h-10 flex items-center justify-center rounded-lg bg-primary text-white font-bold shadow-md shadow-primary/20">1</button>
+<button class="px-4 h-10 flex items-center justify-center rounded-lg bg-surface-container-lowest text-on-surface hover:bg-white border border-outline-variant/10 shadow-sm">2</button>
+<button class="px-4 h-10 flex items-center justify-center rounded-lg bg-surface-container-lowest text-on-surface hover:bg-white border border-outline-variant/10 shadow-sm">3</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg bg-surface-container-lowest text-on-surface hover:bg-white border border-outline-variant/10 shadow-sm">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- FAB: Add Batch -->
+<button class="fixed bottom-10 right-10 w-16 h-16 rounded-full bg-gradient-to-br from-[#00458f] to-[#005cbb] text-white flex items-center justify-center shadow-2xl shadow-primary/40 active:scale-90 transition-transform duration-150 z-50">
+<span class="material-symbols-outlined text-3xl">add</span>
+</button>
+<!-- Contextual Bottom Nav for Tablet/Mobile View -->
+<nav class="md:hidden fixed bottom-0 w-full flex justify-around items-center px-4 py-3 bg-[#ffffff]/80 backdrop-blur-xl border-t border-[#00458f]/10 shadow-[0_-8px_30px_rgb(0,0,0,0.06)] z-50 rounded-t-3xl">
+<a class="flex flex-col items-center justify-center text-[#0d1c2e] p-2 hover:bg-blue-50 transition-colors" href="#">
+<span class="material-symbols-outlined">shopping_basket</span>
+<span class="font-['Inter'] text-[10px] font-bold uppercase tracking-tighter mt-1">Cart</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#0d1c2e] p-2 hover:bg-blue-50 transition-colors" href="#">
+<span class="material-symbols-outlined">calculate</span>
+<span class="font-['Inter'] text-[10px] font-bold uppercase tracking-tighter mt-1">Total</span>
+</a>
+<div class="bg-gradient-to-br from-[#00458f] to-[#005cbb] text-white flex flex-col items-center justify-center rounded-2xl p-4 min-w-[80px] shadow-lg shadow-blue-900/20">
+<span class="material-symbols-outlined">payments</span>
+<span class="font-['Inter'] text-[10px] font-bold uppercase tracking-tighter mt-1">Pay</span>
+</div>
+</nav>
+</body></html>

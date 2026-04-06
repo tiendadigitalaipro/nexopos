@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Precision POS - Sales Command</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-fixed": "#ffddb8",
+                    "primary-fixed-dim": "#abc7ff",
+                    "tertiary": "#653e00",
+                    "surface-tint": "#005cbb",
+                    "on-surface-variant": "#424752",
+                    "inverse-surface": "#233144",
+                    "surface-container-lowest": "#ffffff",
+                    "primary-container": "#005cbb",
+                    "surface": "#f8f9ff",
+                    "outline": "#727784",
+                    "inverse-on-surface": "#eaf1ff",
+                    "on-background": "#0d1c2e",
+                    "on-tertiary-fixed": "#2a1700",
+                    "surface-container-low": "#eff4ff",
+                    "surface-container-high": "#dce9ff",
+                    "primary-fixed": "#d7e2ff",
+                    "on-surface": "#0d1c2e",
+                    "on-secondary-container": "#00714b",
+                    "surface-variant": "#d5e3fc",
+                    "on-tertiary-fixed-variant": "#653e00",
+                    "on-primary-fixed": "#001b3f",
+                    "surface-container": "#e6eeff",
+                    "on-tertiary": "#ffffff",
+                    "secondary-fixed": "#8df7c1",
+                    "inverse-primary": "#abc7ff",
+                    "tertiary-fixed-dim": "#ffb95f",
+                    "error-container": "#ffdad6",
+                    "tertiary-container": "#855300",
+                    "on-primary": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "outline-variant": "#c2c6d4",
+                    "surface-bright": "#f8f9ff",
+                    "secondary-fixed-dim": "#71dba6",
+                    "on-secondary-fixed-variant": "#005235",
+                    "on-error-container": "#93000a",
+                    "on-primary-fixed-variant": "#00458f",
+                    "on-tertiary-container": "#ffd099",
+                    "secondary": "#006c47",
+                    "primary": "#00458f",
+                    "surface-container-highest": "#d5e3fc",
+                    "on-secondary-fixed": "#002113",
+                    "background": "#f8f9ff",
+                    "error": "#ba1a1a",
+                    "on-error": "#ffffff",
+                    "surface-dim": "#ccdbf3",
+                    "secondary-container": "#8af5be",
+                    "on-primary-container": "#c7d9ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Inter"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface flex min-h-screen overflow-hidden">
+<!-- Sidebar Navigation Shell -->
+<aside class="fixed left-0 top-0 flex flex-col h-full z-40 h-screen w-72 rounded-r-none bg-[#d5e3fc] dark:bg-[#1a2b3c] no-border tonal-stacking hidden md:flex">
+<div class="px-6 py-8 flex flex-col gap-1">
+<div class="flex items-center gap-3 mb-8">
+<div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white">
+<span class="material-symbols-outlined">store</span>
+</div>
+<div>
+<h2 class="text-lg font-bold text-[#00458f] font-['Inter']">Main Branch</h2>
+<p class="text-[10px] font-medium uppercase tracking-wider opacity-70">Admin Access</p>
+</div>
+</div>
+<nav class="flex flex-col gap-1">
+<a class="bg-[#00458f] text-white rounded-lg mx-2 my-1 shadow-lg shadow-blue-900/20 px-4 py-3 flex items-center gap-3 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">point_of_sale</span>
+<span class="font-['Inter'] text-sm font-medium uppercase tracking-wider">Sales</span>
+</a>
+<a class="text-[#0d1c2e] dark:text-slate-300 hover:bg-[#eff4ff] dark:hover:bg-slate-800 mx-2 my-1 rounded-lg px-4 py-3 flex items-center gap-3 transition-transform duration-200 hover:translate-x-1" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="font-['Inter'] text-sm font-medium uppercase tracking-wider">Inventory</span>
+</a>
+<a class="text-[#0d1c2e] dark:text-slate-300 hover:bg-[#eff4ff] dark:hover:bg-slate-800 mx-2 my-1 rounded-lg px-4 py-3 flex items-center gap-3 transition-transform duration-200 hover:translate-x-1" href="#">
+<span class="material-symbols-outlined">admin_panel_settings</span>
+<span class="font-['Inter'] text-sm font-medium uppercase tracking-wider">Admin</span>
+</a>
+<a class="text-[#0d1c2e] dark:text-slate-300 hover:bg-[#eff4ff] dark:hover:bg-slate-800 mx-2 my-1 rounded-lg px-4 py-3 flex items-center gap-3 transition-transform duration-200 hover:translate-x-1" href="#">
+<span class="material-symbols-outlined">shopping_cart</span>
+<span class="font-['Inter'] text-sm font-medium uppercase tracking-wider">Purchases</span>
+</a>
+</nav>
+</div>
+<div class="mt-auto p-6 opacity-40 text-xs font-mono">v2.4.0</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 flex flex-col md:ml-72 pb-24 md:pb-0 h-screen">
+<!-- TopAppBar -->
+<header class="flex justify-between items-center px-6 py-4 w-full docked full-width top-0 bg-[#f8f9ff] dark:bg-[#0d1c2e] shadow-none">
+<div class="flex items-center gap-4">
+<button class="md:hidden text-[#00458f]"><span class="material-symbols-outlined">menu</span></button>
+<h1 class="text-2xl font-black text-[#00458f] dark:text-blue-400 uppercase tracking-widest font-['Inter']">Precision POS</h1>
+</div>
+<div class="flex-1 max-w-2xl px-8 hidden md:block">
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">barcode_scanner</span>
+<input class="w-full bg-surface-container-low border-none rounded-full py-3 pl-12 pr-4 focus:ring-2 focus:ring-primary/40 text-on-surface placeholder:text-outline transition-all" placeholder="Scan SKU or Search Products..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="text-right hidden sm:block">
+<p class="text-xs font-bold uppercase tracking-tighter text-secondary">Online</p>
+<p class="text-sm font-semibold">Store Manager</p>
+</div>
+<img alt="User Profile" class="w-10 h-10 rounded-full object-cover" data-alt="Professional middle-aged man in a business suit smiling confidently against a soft office background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAY0TGvsEwqMu6pwslfhwzXoTL8OGJ5rR9tyg4pSi1xpqV3p4JyVXof4nly-lC5WAmjU6I8MNwWigI0-_hsVPnu_bEX8mkY5575OV5i-DxCEx7P4fKstoNLCbch2TCi0-zIVzRKDGbMN_UrfnwHYVdBMiAePKejffXjlhX4GGkl9IxdIufZ7ArlQXLvGVprlEXiuiQWPzv8xouDpmtBYdvnqtSYF_bl5n7J1shCMal4I0cUtUzrcwVuqnMf_dHqJ-hl7CkxeFfML5c"/>
+</div>
+</header>
+<div class="flex-1 flex overflow-hidden">
+<!-- Left: Categories & Grid -->
+<section class="flex-1 overflow-y-auto p-6 hide-scrollbar">
+<!-- Mobile Search -->
+<div class="md:hidden mb-6">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full bg-white border-none rounded-xl py-4 pl-12 shadow-sm" placeholder="Search..." type="text"/>
+</div>
+</div>
+<!-- Categories Bento Grid -->
+<div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 mb-8">
+<button class="p-6 rounded-xl bg-blue-100 hover:bg-blue-200 transition-all flex flex-col items-center justify-center gap-2 group">
+<span class="material-symbols-outlined text-blue-700 text-3xl group-hover:scale-110 transition-transform">medical_services</span>
+<span class="text-xs font-bold uppercase tracking-widest text-blue-900">Antibiotics</span>
+</button>
+<button class="p-6 rounded-xl bg-emerald-100 hover:bg-emerald-200 transition-all flex flex-col items-center justify-center gap-2 group">
+<span class="material-symbols-outlined text-emerald-700 text-3xl group-hover:scale-110 transition-transform">spa</span>
+<span class="text-xs font-bold uppercase tracking-widest text-emerald-900">Personal Care</span>
+</button>
+<button class="p-6 rounded-xl bg-orange-100 hover:bg-orange-200 transition-all flex flex-col items-center justify-center gap-2 group">
+<span class="material-symbols-outlined text-orange-700 text-3xl group-hover:scale-110 transition-transform">devices</span>
+<span class="text-xs font-bold uppercase tracking-widest text-orange-900">Electronics</span>
+</button>
+<button class="p-6 rounded-xl bg-purple-100 hover:bg-purple-200 transition-all flex flex-col items-center justify-center gap-2 group">
+<span class="material-symbols-outlined text-purple-700 text-3xl group-hover:scale-110 transition-transform">vaccines</span>
+<span class="text-xs font-bold uppercase tracking-widest text-purple-900">Vitamins</span>
+</button>
+</div>
+<!-- Product Grid -->
+<div class="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+<!-- Product Card 1 -->
+<div class="bg-surface-container-lowest rounded-full p-2 group hover:shadow-xl transition-all cursor-pointer flex flex-col">
+<div class="relative overflow-hidden rounded-full aspect-square mb-3">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Modern pharmaceutical medicine bottle on a clean white background with soft laboratory lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAsKrL4iCaOMwoW1911X22LuVyl8kbS5PDeKpnNAmK5PuwB8QQVFrIcayeKAiSIQx4vqWzHOX5iGQ-sn7mtl9c4E4-cQa99FMjpgs0Esw8Dp4QGufsLvgsbutuFRZ-sQva7WdNCqqdFLLxt1QEMGClqDHXu_voPa-XDho90Prpi91lkSB-axPM7DRTXV1abqo5zPTfs44nD562-QUCKBTa_8BQA2iAsGNRRbrPkouEaoUBLSI9GX6qEvWHxAK9eVsOcxZYOnXS2Okc"/>
+<div class="absolute top-3 right-3 bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full text-[10px] font-bold">12 IN STOCK</div>
+</div>
+<div class="px-4 pb-4">
+<h3 class="font-bold text-sm mb-1">Amoxicillin 500mg</h3>
+<div class="flex justify-between items-end">
+<span class="text-xl font-black text-primary">$18.50</span>
+<button class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center hover:scale-110 transition-transform">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Product Card 2 -->
+<div class="bg-surface-container-lowest rounded-full p-2 group hover:shadow-xl transition-all cursor-pointer flex flex-col">
+<div class="relative overflow-hidden rounded-full aspect-square mb-3">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Sleek white wireless headphones sitting on a minimalist wooden table with warm natural sunlight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuARIz5Y6soKwl_zZNlxxTlgocxSXLu3Sw2AlD6PlPEU8_e7hxBcTzqmALaeCAkDamzXIf_WubV7pSMA9Ml9Gti_uuRoaqest4E9y9BoOcKLvMERWPdsOMjXdiYlOStX-RtzgWgMgQOw6mfabHjX-n9FHQ1MZAB7f7aznXmA9bt9D8R2-0iEPSiOIizT2YpTS5osdvjv2WExdLYn8nJ9an5qX-D_h08TG_C-dCLHcuMzwPNE8DeJJ46BRd9li24iECujCvH_GzPIYNg"/>
+<div class="absolute top-3 right-3 bg-error-container text-on-error-container px-3 py-1 rounded-full text-[10px] font-bold uppercase">Low Stock</div>
+</div>
+<div class="px-4 pb-4">
+<h3 class="font-bold text-sm mb-1">Wireless Pro X1</h3>
+<div class="flex justify-between items-end">
+<span class="text-xl font-black text-primary">$124.99</span>
+<button class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center hover:scale-110 transition-transform">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Product Card 3 -->
+<div class="bg-surface-container-lowest rounded-full p-2 group hover:shadow-xl transition-all cursor-pointer flex flex-col">
+<div class="relative overflow-hidden rounded-full aspect-square mb-3">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Artisanal organic skin serum bottle with dropper, botanical leaves in background, luxury spa aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBKhvov59auNAylvqcWXvHEdBEokXV5bEgYjatUT4tG27PqQ4gO7lmuzG83NvEEyy5d5Ray4IfIpUncKFGPIklvJ6X8L933R-QKUgCuBo2FFqxGZJSM5YoNchEZhcjQFFLwonizKTrCsXHxWHjE38M6Qs5XQeJGy2cGN6uFF-u8UJWnsjAqMZaWV2WLW0SfAjyOngdSLgf2tdCQJIuL9i_jyM-W486vOVEARkFQdaTAv0doZ7vjoV_5heo1x0fXWiweyeoavE4z0uA"/>
+<div class="absolute top-3 right-3 bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full text-[10px] font-bold uppercase">In Stock</div>
+</div>
+<div class="px-4 pb-4">
+<h3 class="font-bold text-sm mb-1">Pure Glow Serum</h3>
+<div class="flex justify-between items-end">
+<span class="text-xl font-black text-primary">$42.00</span>
+<button class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center hover:scale-110 transition-transform">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Product Card 4 -->
+<div class="bg-surface-container-lowest rounded-full p-2 group hover:shadow-xl transition-all cursor-pointer flex flex-col">
+<div class="relative overflow-hidden rounded-full aspect-square mb-3">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Minimalist vitamin bottle with clear capsules inside, bright fresh lighting on a light blue surface" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBgzBcXRyx_FFfz0XEJyMB_AhR89uQ547_YcQsdW2NqbhLD7vEVBwFGBCv1bd4cUt3BrA19JrFKIeg3qkDDTOLFpzuoaDLUNGbvDpEAyYu02_W6YYbZ7ZIQsmWXq1ar5GDI6AAWtK4cs4ylt9lSWZC8E-ISpRIXiFCfYaX6hGppQ8Du4e64uRJXDUQk99Nk6IC-GOWdZs-PemL9emW65AtfPP3UbzMj-bT-GbwoPlTlo3bCyMismASoTspNC3IriD31tJeqfhsvUn4"/>
+<div class="absolute top-3 right-3 bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full text-[10px] font-bold uppercase">In Stock</div>
+</div>
+<div class="px-4 pb-4">
+<h3 class="font-bold text-sm mb-1">Multi-Vitamin D3</h3>
+<div class="flex justify-between items-end">
+<span class="text-xl font-black text-primary">$15.75</span>
+<button class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center hover:scale-110 transition-transform">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Right: Shopping Cart Panel -->
+<aside class="w-96 bg-white shadow-[-8px_0_30px_rgba(0,0,0,0.04)] z-10 flex flex-col hidden xl:flex">
+<div class="p-6 border-b border-surface-container flex justify-between items-center">
+<h2 class="text-xl font-black text-on-surface uppercase tracking-tight">Active Cart</h2>
+<span class="px-3 py-1 bg-primary/10 text-primary text-xs font-bold rounded-full">3 ITEMS</span>
+</div>
+<div class="flex-1 overflow-y-auto p-6 space-y-4">
+<!-- Cart Item -->
+<div class="flex gap-4 items-center animate-in slide-in-from-right">
+<img alt="Product" class="w-12 h-12 rounded-xl object-cover" data-alt="Macro photo of medicine tablets" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBZexdDWqFgQswpCLBPpbmY8Vp4fhrulPXwHZTgf2y2AmblJSbfZXXCZSC5Q3XxsUxXrSZ1DX0TE8Ku56AQBcg5pmyhJPSmCAY2vAlFR0R-DC6tA7tKFQDVZiWELncJiRpq8v0eyM_KrtfgdN3LOMJ6b4p-aUIhNLQpGfTPM9FlQWIs8tRqWN6scPfF-jsqQhRcDIf2FZ66PwFHpEWz-ev0VS7h8V_lXxWrfFYgYWQggiJUmLX3BiRzohMuLSjWHySJ5GEdYlobDh4"/>
+<div class="flex-1">
+<h4 class="text-sm font-bold truncate">Amoxicillin 500mg</h4>
+<p class="text-xs text-outline">$18.50 / unit</p>
+</div>
+<div class="flex items-center gap-2 bg-surface-container rounded-full px-2 py-1">
+<button class="w-6 h-6 flex items-center justify-center"><span class="material-symbols-outlined text-sm">remove</span></button>
+<span class="text-sm font-bold w-4 text-center">1</span>
+<button class="w-6 h-6 flex items-center justify-center"><span class="material-symbols-outlined text-sm">add</span></button>
+</div>
+</div>
+<!-- Cart Item -->
+<div class="flex gap-4 items-center">
+<img alt="Product" class="w-12 h-12 rounded-xl object-cover" data-alt="Detail of high-end headphones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJ3Ap4H4BCDK3xTH98_rIkz9yrr9mMqSU_TlOdOwKR64bYs8_VBMcWXfNTcJDLQ86YQFYv5sINcSuvFxt7-RlVJRyMzH9qUtqK27LA-874D626GziH-uJ1LEvOMqVyqyWCJs9OdZ_5nO9ftt5lFW488TZO83t0sETq2I4Dm4uzJJjTW1qDpwTGp-Q2SyCrY3eD7fkvPGwDYOkyIApiCmiRYkH3-dK1Ffcqcgf9n4LvDLXr2KT_vD8K7iI4hFVMUhXfTpsxfuuIeTo"/>
+<div class="flex-1">
+<h4 class="text-sm font-bold truncate">Wireless Pro X1</h4>
+<p class="text-xs text-outline">$124.99 / unit</p>
+</div>
+<div class="flex items-center gap-2 bg-surface-container rounded-full px-2 py-1">
+<button class="w-6 h-6 flex items-center justify-center"><span class="material-symbols-outlined text-sm">remove</span></button>
+<span class="text-sm font-bold w-4 text-center">1</span>
+<button class="w-6 h-6 flex items-center justify-center"><span class="material-symbols-outlined text-sm">add</span></button>
+</div>
+</div>
+</div>
+<!-- Calculations -->
+<div class="p-6 bg-surface-container-low rounded-t-3xl space-y-3">
+<div class="flex justify-between text-sm">
+<span class="text-outline">Subtotal</span>
+<span class="font-medium">$143.49</span>
+</div>
+<div class="flex justify-between text-sm">
+<span class="text-outline">Tax (VAT 16%)</span>
+<span class="font-medium">$22.96</span>
+</div>
+<div class="flex justify-between text-sm">
+<div class="flex items-center gap-1">
+<span class="text-outline">IGTF</span>
+<span class="bg-tertiary/10 text-tertiary text-[10px] font-bold px-1.5 rounded">3%</span>
+</div>
+<span class="font-medium">$4.30</span>
+</div>
+<div class="pt-4 mt-2 border-t border-outline/10">
+<div class="flex justify-between items-baseline mb-6">
+<span class="text-sm font-bold uppercase tracking-widest text-outline">Total Amount</span>
+<span class="text-4xl font-black text-primary">$170.75</span>
+</div>
+<button class="w-full h-16 bg-gradient-to-br from-[#00458f] to-[#005cbb] text-white rounded-full font-black text-lg uppercase tracking-widest flex items-center justify-center gap-3 shadow-lg shadow-primary/20 active:scale-95 transition-all">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">payments</span>
+                            Process Payment
+                        </button>
+</div>
+</div>
+</aside>
+</div>
+</main>
+<!-- Bottom Navigation Bar (Mobile only) -->
+<nav class="fixed bottom-0 w-full flex justify-around items-center px-4 py-3 bg-opacity-90 bg-[#ffffff]/80 backdrop-blur-xl dark:bg-[#0d1c2e]/80 border-t border-[#00458f]/10 shadow-[0_-8px_30px_rgb(0,0,0,0.06)] z-50 rounded-t-3xl md:hidden">
+<a class="flex flex-col items-center justify-center text-[#0d1c2e] dark:text-slate-400 p-2 hover:bg-blue-50 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined">shopping_basket</span>
+<span class="font-['Inter'] text-[10px] font-bold uppercase tracking-tighter mt-1">Cart</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#0d1c2e] dark:text-slate-400 p-2 hover:bg-blue-50 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined">calculate</span>
+<span class="font-['Inter'] text-[10px] font-bold uppercase tracking-tighter mt-1">Total</span>
+</a>
+<a class="bg-gradient-to-br from-[#00458f] to-[#005cbb] text-white flex flex-col items-center justify-center rounded-2xl p-4 min-w-[80px] active:scale-90 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span class="font-['Inter'] text-[10px] font-bold uppercase tracking-tighter mt-1">Pay</span>
+</a>
+</nav>
+<!-- FAB (Only on specific contexts, hidden here as it's a detail screen for POS) -->
+</body></html>

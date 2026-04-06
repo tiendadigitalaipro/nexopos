@@ -1,0 +1,204 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model License {
+  id              String   @id @default(cuid())
+  licenseKey      String   @unique
+  businessName    String
+  ownerName       String
+  email           String
+  phone           String?
+  maxUsers        Int      @default(1)
+  isActive        Boolean  @default(true)
+  expiresAt       DateTime?
+  activatedAt     DateTime @default(now())
+  lastValidated   DateTime @updatedAt
+  createdAt       DateTime @default(now())
+  users           User[]
+}
+
+model User {
+  id            String   @id @default(cuid())
+  name          String
+  email         String   @unique
+  password      String
+  role          String   @default("cashier")
+  pin           String?
+  isActive      Boolean  @default(true)
+  licenseId     String?
+  license       License? @relation(fields: [licenseId], references: [id])
+  sales         Sale[]
+  openedRegisters CashRegister[] @relation("CashRegisterOpener")
+  closedRegisters CashRegister[] @relation("CashRegisterCloser")
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model Category {
+  id          String    @id @default(cuid())
+  name        String
+  color       String    @default("#00458f")
+  icon        String    @default("category")
+  sortOrder   Int       @default(0)
+  isActive    Boolean   @default(true)
+  products    Product[]
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Product {
+  id              String    @id @default(cuid())
+  sku             String    @unique
+  barcode         String?   @unique
+  name            String
+  description     String?
+  categoryId      String?
+  category        Category? @relation(fields: [categoryId], references: [id])
+  costPrice       Float     @default(0)
+  salePrice       Float     @default(0)
+  wholesalePrice  Float?
+  unitsPerBulk    Int?
+  bulkPrice       Float?
+  profitPercent   Int?
+  taxRate         Float     @default(16)
+  minStock        Int       @default(5)
+  currentStock    Int       @default(0)
+  isActive        Boolean   @default(true)
+  batches         Batch[]
+  saleItems       SaleItem[]
+  purchaseItems   PurchaseItem[]
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+}
+
+model Batch {
+  id              String     @id @default(cuid())
+  productId       String
+  product         Product    @relation(fields: [productId], references: [id])
+  batchNumber     String
+  supplier        String?
+  quantity        Int
+  remaining       Int
+  costPrice       Float
+  expirationDate  DateTime?
+  receivedDate    DateTime   @default(now())
+  status          String     @default("healthy")
+  saleItems       SaleItem[]
+  createdAt       DateTime   @default(now())
+}
+
+model Supplier {
+  id           String          @id @default(cuid())
+  name         String
+  rif          String?
+  phone        String?
+  email        String?
+  address      String?
+  balance      Float           @default(0)
+  isActive     Boolean         @default(true)
+  purchases    PurchaseOrder[]
+  createdAt    DateTime        @default(now())
+  updatedAt    DateTime        @updatedAt
+}
+
+model PurchaseOrder {
+  id              String          @id @default(cuid())
+  orderNumber     String          @unique
+  supplierId      String?
+  supplier        Supplier?       @relation(fields: [supplierId], references: [id])
+  status          String          @default("pending")
+  subtotal        Float           @default(0)
+  taxAmount       Float           @default(0)
+  totalAmount     Float           @default(0)
+  items           PurchaseItem[]
+  receivedDate    DateTime?
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+}
+
+model PurchaseItem {
+  id              String          @id @default(cuid())
+  purchaseOrderId String
+  purchaseOrder   PurchaseOrder   @relation(fields: [purchaseOrderId], references: [id])
+  productId       String?
+  product         Product?        @relation(fields: [productId], references: [id])
+  productName     String
+  quantity        Int
+  unitCost        Float
+  total           Float
+  batchId         String?
+}
+
+model CashRegister {
+  id              String   @id @default(cuid())
+  name            String
+  openingBalance  Float    @default(0)
+  currentBalance  Float    @default(0)
+  status          String   @default("closed")
+  openedBy        String?
+  openedAt        DateTime?
+  closedBy        String?
+  closedAt        DateTime?
+  sales           Sale[]
+  createdAt       DateTime @default(now())
+  openUser        User?    @relation("CashRegisterOpener", fields: [openedBy], references: [id])
+  closeUser       User?    @relation("CashRegisterCloser", fields: [closedBy], references: [id])
+}
+
+model Sale {
+  id              String          @id @default(cuid())
+  saleNumber      String          @unique
+  cashRegisterId  String?
+  cashRegister    CashRegister?   @relation(fields: [cashRegisterId], references: [id])
+  userId          String?
+  user            User?           @relation(fields: [userId], references: [id])
+  status          String          @default("completed")
+  subtotal        Float           @default(0)
+  taxAmount       Float           @default(0)
+  igtfAmount      Float           @default(0)
+  discountAmount  Float           @default(0)
+  totalAmount     Float           @default(0)
+  paymentMethod   String          @default("cash")
+  paymentRef      String?
+  customerName    String?
+  items           SaleItem[]
+  isHeld          Boolean         @default(false)
+  heldAt          DateTime?
+  resumedAt       DateTime?
+  createdAt       DateTime        @default(now())
+}
+
+model SaleItem {
+  id            String   @id @default(cuid())
+  saleId        String
+  sale          Sale     @relation(fields: [saleId], references: [id])
+  productId     String?
+  product       Product? @relation(fields: [productId], references: [id])
+  batchId       String?
+  batch         Batch?   @relation(fields: [batchId], references: [id])
+  productName   String
+  quantity      Int
+  unitPrice     Float
+  total         Float
+  createdAt     DateTime @default(now())
+}
+
+model DailySummary {
+  id                  String   @id @default(cuid())
+  date                String   @unique
+  totalSales          Float    @default(0)
+  totalProfit         Float    @default(0)
+  totalTransactions   Int      @default(0)
+  cashTotal           Float    @default(0)
+  cardTotal           Float    @default(0)
+  transferTotal       Float    @default(0)
+  divisasTotal        Float    @default(0)
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+}
