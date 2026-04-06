@@ -10,10 +10,10 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Precision POS - Professional Point of Sale",
-  description: "Complete POS/ERP system for professional businesses",
+  title: "NexoPOS - Professional Point of Sale System",
+  description: "NexoPOS: Complete POS/ERP system for modern businesses — Touch & Mouse compatible",
   icons: {
-    icon: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏪</text></svg>",
+    icon: "/logo.png",
   },
 };
 

@@ -20,14 +20,14 @@ export async function POST() {
     // Create license
     const license = await db.license.create({
       data: {
-        licenseKey: 'PRECISION-2024-PRO',
-        businessName: 'Farmacia Precisión',
+        licenseKey: 'NEXOPOS-2024-PRO',
+        businessName: 'NexoPOS Demo Store',
         ownerName: 'Dr. Juan Pérez',
-        email: 'admin@precision.com',
+        email: 'admin@nexopos.com',
         phone: '+58 412-1234567',
         maxUsers: 10,
         isActive: true,
-        expiresAt: new Date('2025-12-31'),
+        expiresAt: new Date('2027-12-31'),
       },
     })
 
@@ -39,6 +39,17 @@ export async function POST() {
         password: 'admin123',
         pin: '1234',
         role: 'admin',
+        licenseId: license.id,
+      },
+    })
+
+    await db.user.create({
+      data: {
+        name: 'Supervisor',
+        email: 'supervisor@pos.com',
+        password: 'supervisor123',
+        pin: '5678',
+        role: 'supervisor',
         licenseId: license.id,
       },
     })

@@ -82,7 +82,7 @@ export default function Home() {
     return (
       <div className="min-h-screen bg-[#f8f9ff] flex flex-col items-center justify-center gap-4">
         <Loader2 className="w-8 h-8 animate-spin text-[#00458f]" />
-        <p className="text-sm text-[#727784] font-medium uppercase tracking-wider">Initializing Precision POS...</p>
+        <p className="text-sm text-[#727784] font-medium uppercase tracking-wider">Initializing NexoPOS...</p>
       </div>
     )
   }

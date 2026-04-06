@@ -64,8 +64,8 @@ export default function LicensePanel() {
           <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-br from-[#00458f] to-[#005cbb] mb-4 shadow-lg">
             <Shield className="w-10 h-10 text-white" />
           </div>
-          <h1 className="text-3xl font-black text-[#0d1c2e] tracking-tight">PRECISION POS</h1>
-          <p className="text-sm text-[#727784] mt-1 uppercase tracking-widest font-medium">Professional Point of Sale System</p>
+          <h1 className="text-3xl font-black text-[#0d1c2e] tracking-tight">NexoPOS</h1>
+          <p className="text-sm text-[#727784] mt-1 uppercase tracking-widest font-medium">Professional Point of Sale & ERP</p>
         </div>
 
         {/* License Card */}
@@ -90,7 +90,7 @@ export default function LicensePanel() {
                 <Input
                   value={licenseKey}
                   onChange={(e) => { setLicenseKey(e.target.value); setError('') }}
-                  placeholder="PRECISION-2024-XXXX"
+                  placeholder="NEXOPOS-2024-XXXX"
                   className="h-12 text-base font-mono tracking-wider bg-[#eff4ff] border-0 focus-visible:ring-[#00458f]"
                   onKeyDown={(e) => e.key === 'Enter' && handleValidate()}
                 />
@@ -152,7 +152,7 @@ export default function LicensePanel() {
             {/* Demo hint */}
             <div className="mt-4 text-center">
               <p className="text-xs text-[#727784]">
-                Demo key: <code className="bg-[#eff4ff] px-2 py-0.5 rounded font-mono text-[#00458f]">PRECISION-2024-PRO</code>
+                Demo key: <code className="bg-[#eff4ff] px-2 py-0.5 rounded font-mono text-[#00458f]">NEXOPOS-2024-PRO</code>
               </p>
             </div>
           </CardContent>

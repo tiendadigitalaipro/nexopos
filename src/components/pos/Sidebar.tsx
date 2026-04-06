@@ -22,7 +22,7 @@ export default function Sidebar() {
     <aside className="hidden lg:flex flex-col w-[72px] bg-[#00458f] text-white min-h-screen">
       {/* Logo */}
       <div className="flex items-center justify-center h-16 bg-[#003570]">
-        <span className="text-xl font-black tracking-tighter">PP</span>
+        <span className="text-xl font-black tracking-tighter">NX</span>
       </div>
 
       {/* Nav Items */}

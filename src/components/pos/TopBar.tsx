@@ -32,12 +32,12 @@ export default function TopBar() {
     <header className="h-14 bg-white flex items-center px-4 gap-3 border-b border-[#d5e3fc]/50">
       {/* Logo for mobile */}
       <div className="lg:hidden flex items-center gap-2">
-        <span className="text-lg font-black text-[#00458f] tracking-tighter">PRECISION POS</span>
+        <span className="text-lg font-black text-[#00458f] tracking-tighter">NexoPOS</span>
       </div>
 
       {/* Desktop Logo */}
       <div className="hidden lg:flex items-center gap-2 w-48">
-        <span className="text-lg font-black text-[#00458f] tracking-tighter">PRECISION POS</span>
+        <span className="text-lg font-black text-[#00458f] tracking-tighter">NexoPOS</span>
       </div>
 
       {/* Search */}
